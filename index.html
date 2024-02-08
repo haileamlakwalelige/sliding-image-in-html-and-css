@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Slider</title>
+    <style>
+      .slideing {
+        margin: 0;
+        background-image: url("https://images.unsplash.com/photo-1501949997128-2fdb9f6428f1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8N3x8fGVufDB8fHx8fA%3D%3D");
+        background-size: cover;
+        background-position: center;
+        height: min(
+          100vh,
+          500px
+        ); /* Set height to 500px for larger devices, but adjust based on screen size */
+      }
+      .slider-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        min-height: 500px; /* Set a minimum height for the container */
+        display: flex;
+        align-items: center;
+      }
+      .slides {
+        display: flex;
+        width: 300%;
+        animation: slideAnimation 15s infinite; /* Adjust the duration as needed */
+      }
+      .slide {
+        width: 100%;
+        flex: 0 0 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        /* margin-right: 10%; */
+        /* margin-left: 10%; */
+      }
+      .slide,
+      p {
+        color: #9ac760;
+      }
+      .slide,
+      h1 {
+        color: #fff;
+      }
+      .pixel {
+        padding-right: 10%;
+        padding-left: 10%;
+        font-size: 20px;
+        font-weight: 600px;
+      }
+      .pical {
+        color: white;
+        font-size: 36px;
+        font-weight: 600;
+      }
+      @keyframes slideAnimation {
+        0% {
+          transform: translateX(0%);
+        }
+        20% {
+          transform: translateX(0%);
+        }
+        33.33% {
+          transform: translateX(-100%);
+        }
+        53.33% {
+          transform: translateX(-100%);
+        }
+        66.67% {
+          transform: translateX(-200%);
+        }
+        86.67% {
+          transform: translateX(-200%);
+        }
+        100% {
+          transform: translateX(0%);
+        }
+      }
+      .dots {
+        text-align: center;
+        margin-top: -100px;
+        border-top-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+      }
+      .dot {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-top-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+        background-color: #bbb;
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+      .dot.active {
+        color: #ffab34;
+        background-color: #ffab34;
+      }
+
+      /* Media query for smaller devices */
+      @media screen and (max-width: 600px) {
+        body {
+          height: min(100vh, 75vh); /* Adjust height for smaller devices */
+        }
+        .slider-container {
+          min-height: 75vh; /* Adjust container height for smaller devices */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slideing">
+      <div class="slider-container">
+        <div class="slides">
+          <div class="slide">
+            <h2 class="pical">Transforming Lives, One Village at a Time</h2>
+            <p class="pixel in">
+              Welcome to East African Village Outreach (EAVO), where compassion
+              meets action. We believe in making a lasting impact on rural
+              communities in East Africa. Through our humanitarian efforts, we
+              strive to address the diverse needs of these villages, fostering
+              positive change and sustainable development.
+            </p>
+          </div>
+          <div class="slide">
+            <h2 class="pical">Transforming Lives, One Village at a Time</h2>
+            <p class="pixel in">
+              Welcome to East African Village Outreach (EAVO), where compassion
+              meets action. We believe in making a lasting impact on rural
+              communities in East Africa. Through our humanitarian efforts, we
+              strive to address the diverse needs of these villages, fostering
+              positive change and sustainable development.
+            </p>
+          </div>
+          <div class="slide">
+            <h2 class="pical">Transforming Lives, One Village at a Time</h2>
+            <p class="pixel in">
+              Welcome to East African Village Outreach (EAVO), where compassion
+              meets action. We believe in making a lasting impact on rural
+              communities in East Africa. Through our humanitarian efforts, we
+              strive to address the diverse needs of these villages, fostering
+              positive change and sustainable development.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dots"></div>
+    </div>
+    <script>
+      let slideIndex = 0;
+
+      function showSlides() {
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelector(".dots");
+        if (slides.length === 0) return;
+
+        const dotHTML = Array.from(slides)
+          .map((_, index) => {
+            return `<span class="dot ${
+              index === slideIndex ? "active" : ""
+            }" onclick="currentSlide(${index})"></span>`;
+          })
+          .join("");
+
+        dots.innerHTML = dotHTML;
+      }
+
+      function currentSlide(index) {
+        slideIndex = index;
+        showSlides();
+      }
+
+      showSlides(); // Initial call to show the dots
+
+      setInterval(() => {
+        slideIndex =
+          (slideIndex + 1) % document.querySelectorAll(".slide").length;
+        showSlides();
+      }, 5000); // Change slide every 5 seconds
+    </script>
+
+    <!-- </div> -->
+  </body>
+</html>
